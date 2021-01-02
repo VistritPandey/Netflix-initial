@@ -1,10 +1,26 @@
 import React, { useState, useEffect } from "react";
 import "./Banner.css";
 import requests from "./Requests";
+import Axios from "./Axios";
 
 function Banner() {
   const [movie, setMovie] = useState([]);
-  //I have hide my requests...
+
+  useEffect(() => {
+    async function fetchData() {
+      const request = await Axios.get(requests.fetchNetflixOriginals);
+      setMovie(
+        request.data.results[
+          Math.floor(Math.random() * request.data.results.length - 1)
+        ]
+      );
+    }
+    fetchData();
+  }, []);
+
+  function truncate(str, n) {
+    return str?.length > n ? str.substr(0, n - 1) + "...." : str;
+  }
 
   return (
     <header
@@ -16,14 +32,18 @@ function Banner() {
       }}
     >
       <div className="banner__contents">
-        <h1 className="banner__title">Test</h1>
+        <h1 className="banner__title">
+          {movie?.title || movie?.name || movie?.original_name}
+        </h1>
 
         <div className="banner__button">
           <button className="banner__button">Play</button>
           <button className="banner__button">My Lists</button>
         </div>
 
-        <h1 className="banner__description">Test</h1>
+        <h1 className="banner__description">
+          {truncate(movie?.overview, 150)}
+        </h1>
       </div>
 
       <div className="banner--fadeBottom" />
