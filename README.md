@@ -1,4 +1,6 @@
 # Deployed at: https://reactor-netflix.web.app
+## CONFIG FILE REMOVED FROM Firebase.js , if you want it to run it on your local machine, get a new CONFIG File from Firebase Settings
+# ![](https://komarev.com/ghpvc/?username=VistritPandey)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
